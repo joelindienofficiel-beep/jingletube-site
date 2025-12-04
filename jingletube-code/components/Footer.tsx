@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
                 </span>
               </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Le spécialiste de l'identité sonore radio. Jingles chantés sur mesure et habillage antenne haut de gamme pour booster votre audience.
+              Le spécialiste de l'identité sonore radio. Jingles chantés sur mesure pour booster votre audience.
             </p>
           </div>
 
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-brand-primary mt-1 flex-shrink-0" />
-                <span className="text-gray-300">Paris, France</span>
+                <span className="text-gray-300">Limoges, France</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-brand-primary mt-1 flex-shrink-0" />
