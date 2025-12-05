@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
                   <span className="text-brand-primary text-xl">.com</span>
                 </span>
                 <span className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold leading-none mt-1">
-                  Production Radio
+                  Production Jingles Radio
                 </span>
               </div>
             </Link>
