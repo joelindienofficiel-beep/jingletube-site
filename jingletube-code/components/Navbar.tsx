@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   // Custom Logo SVG Component
   const Logo = () => (
     <img 
-      src="/logo_jt_stext" 
+      src="/logo_jt_stext.png" 
       alt="Logo Jingletube" 
       className="w-16 h-16 drop-shadow-md" 
     />
