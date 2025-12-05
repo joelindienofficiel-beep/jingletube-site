@@ -65,8 +65,8 @@ const Home: React.FC = () => {
             Leader du Jingle Radio
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
-            Vos jingles sont <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-400">des tubes.</span>
+            Vos jingles chantés <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-400">seront des tubes.</span>
           </h1>
           <p className="text-lg md:text-xl text-blue-100 max-w-2xl mb-10 leading-relaxed font-light">
             Boostez l'identité sonore de votre station avec des <strong>jingles chantés sur mesure</strong> de qualité studio. L'habillage antenne qui marque les esprits.
