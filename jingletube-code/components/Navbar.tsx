@@ -16,28 +16,11 @@ const Navbar: React.FC = () => {
 
   // Custom Logo SVG Component
   const Logo = () => (
-    <div className="relative w-10 h-10 flex items-center justify-center">
-      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md">
-        <defs>
-          <linearGradient id="gradBlue" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#06b6d4', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#172554', stopOpacity: 1 }} />
-          </linearGradient>
-          <linearGradient id="gradOrange" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#fbbf24', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#ea580c', stopOpacity: 1 }} />
-          </linearGradient>
-        </defs>
-        {/* J Shape */}
-        <path d="M 30 20 L 50 20 L 50 70 Q 50 85 35 85 L 25 85" stroke="url(#gradBlue)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        {/* T Shape */}
-        <path d="M 50 20 L 80 20" stroke="url(#gradOrange)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        <path d="M 65 20 L 65 80" stroke="url(#gradOrange)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        {/* Microphone abstract detail */}
-        <circle cx="50" cy="50" r="10" fill="white" className="drop-shadow-sm" />
-        <rect x="46" y="42" width="8" height="16" rx="4" fill="#172554" />
-      </svg>
-    </div>
+    <img 
+      src="/logo_jt_stext" 
+      alt="Logo Jingletube" 
+      className="w-16 h-16 drop-shadow-md" 
+    />
   );
 
   return (
