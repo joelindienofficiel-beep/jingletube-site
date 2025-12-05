@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     <img 
       src="/logo_jt_stext.png" 
       alt="Logo Jingletube" 
-      className="h-14 drop-shadow-md" 
+      className="h-12 drop-shadow-md" 
     />
   );
 
