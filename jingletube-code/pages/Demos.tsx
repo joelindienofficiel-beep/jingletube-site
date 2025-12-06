@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // ⬅️ AJOUT DE useState
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mic } from 'lucide-react';
 import AudioPlayer from '../components/AudioPlayer';
@@ -7,7 +7,6 @@ import { DemoTrack } from '../types';
 
 const Demos: React.FC = () => {
     
-    // NOUVEL ÉTAT GLOBAL : Suit quel ID est en cours de lecture
     const [currentlyPlayingId, setCurrentlyPlayingId] = useState<string | null>(null);
 
     const demos: DemoTrack[] = [
@@ -26,45 +25,51 @@ const Demos: React.FC = () => {
     const getAudioUrl = (id: string) => `/demo-${id}.mp3`;
 
     const playDemo = (id: string) => {
-        const url = getAudioUrl(id);
+        
+        if (currentlyPlayingId === id) {
+            if (currentAudioInstance) {
+                currentAudioInstance.pause();
+                currentAudioInstance.currentTime = 0;
+                currentAudioInstance = null;
+            }
+            setCurrentlyPlayingId(null);
+            return;
+        }
 
-        // 1. Arrêter l'audio précédent
         if (currentAudioInstance) {
             currentAudioInstance.pause();
             currentAudioInstance.currentTime = 0;
-            
-            // Si on clique sur le même ID, on s'arrête et on réinitialise l'état
-            if (currentlyPlayingId === id) {
-                setCurrentlyPlayingId(null); // ⬅️ ARRET ET MISE À JOUR DE L'ÉTAT
-                return; 
-            }
+            currentAudioInstance = null;
         }
-        
-        // 2. Démarrer le nouvel audio
+
+        const url = getAudioUrl(id);
         const audio = new Audio(url); 
         currentAudioInstance = audio;
+        
+        audio.onended = () => {
+            setCurrentlyPlayingId(null);
+            currentAudioInstance = null;
+        };
+        
         audio.play().catch(error => {
             console.error("Erreur de lecture audio:", error);
         });
 
-        // 3. Mettre à jour l'état pour que l'icône change
         setCurrentlyPlayingId(id);
     };
 
     return (
         <div className="min-h-screen bg-slate-50">
-            {/* Header */}
             <div className="bg-brand-dark py-16 md:py-20 text-center px-4">
                 <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
                     Écoutez la différence
                 </h1>
                 <p className="text-blue-200 text-lg max-w-2xl mx-auto">
                     Découvrez une sélection de nos dernières productions de jingles radio.
-                    <br/>La qualité studio au service de votre identité sonore.
+                    La qualité studio au service de votre identité sonore.
                 </p>
             </div>
 
-            {/* Player Section */}
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-10">
                 <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-100">
                     <div className="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
@@ -79,8 +84,7 @@ const Demos: React.FC = () => {
                             <AudioPlayer 
                                 key={track.id} 
                                 track={track} 
-                                // On envoie l'état de lecture et la fonction de clic
-                                isPlaying={currentlyPlayingId === track.id} // ⬅️ NOUS PASSONS L'ÉTAT VISUEL
+                                isPlaying={currentlyPlayingId === track.id}
                                 onPlayClick={() => playDemo(track.id)} 
                             />
                         ))}
