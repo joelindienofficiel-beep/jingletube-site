@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'; // RETRAIT DE { useState }
 import { Play, Pause } from 'lucide-react';
 import { DemoTrack } from '../types';
 
 interface AudioPlayerProps {
     track: DemoTrack;
+    // AJOUT DE LA PROPRIÉTÉ isPlaying
+    isPlaying: boolean; 
 }
 
-// 1. Mise à jour de la signature du composant pour accepter la fonction de clic
-const AudioPlayer: React.FC<AudioPlayerProps & { onPlayClick: (id: string) => void }> = ({ track, onPlayClick }) => {
+const AudioPlayer: React.FC<AudioPlayerProps & { onPlayClick: () => void }> = ({ track, onPlayClick, isPlaying }) => {
     
-    // Le composant gère toujours son état local (pour l'icône et l'effet visuel)
-    const [isPlaying, setIsPlaying] = useState(false);
+    // SUPPRESSION DE const [isPlaying, setIsPlaying] = useState(false);
+    // SUPPRESSION DE const handlePlayClick = () => { ... }
 
-    // Fonction pour gérer le clic sur le bouton
-    const handlePlayClick = () => {
-        // 2. Appel de la fonction globale (qui joue le son et gère l'arrêt du précédent)
-        onPlayClick(track.id);
-        
-        // 3. Mise à jour de l'état local pour changer l'icône
-        setIsPlaying(prev => !prev);
-    };
-
-  
     return (
         <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-all group">
             <button 
-                // 4. Le bouton est branché à la nouvelle fonction
-                onClick={handlePlayClick} 
+                // Le bouton appelle juste l'action globale
+                onClick={onPlayClick}
                 className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${
                     isPlaying ? 'bg-brand-accent text-white scale-105' : 'bg-slate-100 text-brand-dark group-hover:bg-brand-primary group-hover:text-white'
                 }`}
@@ -43,7 +34,6 @@ const AudioPlayer: React.FC<AudioPlayerProps & { onPlayClick: (id: string) => vo
                 {/* Fake Visualizer */}
                 <div className="h-8 flex items-center gap-0.5">
                     {Array.from({ length: 40 }).map((_, i) => {
-                        // Generate a pseudo-random height for the bar based on index and track title length
                         const height = Math.max(20, Math.min(100, ((i * track.title.length * 7) % 80) + 20));
                         return (
                             <div 
