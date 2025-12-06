@@ -16,6 +16,24 @@ const Demos: React.FC = () => {
     { id: '7', title: 'Summer Hits Jingle', category: 'CHR / Top 40', duration: '0:10' },
     { id: '8', title: 'Morning Coffee Soft', category: 'Jazz / Lounge', duration: '0:25' },
   ];
+  let currentAudioInstance: HTMLAudioElement | null = null;
+
+    const getAudioUrl = (id: string) => `/demo-${id}.mp3`;
+
+    const playDemo = (id: string) => {
+        const url = getAudioUrl(id);
+
+        if (currentAudioInstance) {
+            currentAudioInstance.pause();
+            currentAudioInstance.currentTime = 0;
+        }
+        
+        const audio = new Audio(url); 
+        currentAudioInstance = audio;
+        audio.play().catch(error => {
+            console.error("Erreur de lecture audio:", error);
+        });
+    };
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -42,7 +60,11 @@ const Demos: React.FC = () => {
 
           <div className="grid grid-cols-1 gap-4">
             {demos.map((track) => (
-              <AudioPlayer key={track.id} track={track} />
+              <AudioPlayer 
+  key={track.id} 
+  track={track} 
+  onPlayClick={() => playDemo(track.id)} // ⬅️ LA LIAISON EST ICI !
+/>
             ))}
           </div>
 
