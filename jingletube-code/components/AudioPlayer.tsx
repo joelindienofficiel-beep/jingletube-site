@@ -1,22 +1,17 @@
-import React from 'react'; // RETRAIT DE { useState }
+import React from 'react';
 import { Play, Pause } from 'lucide-react';
 import { DemoTrack } from '../types';
 
 interface AudioPlayerProps {
     track: DemoTrack;
-    // AJOUT DE LA PROPRIÉTÉ isPlaying
     isPlaying: boolean; 
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps & { onPlayClick: () => void }> = ({ track, onPlayClick, isPlaying }) => {
     
-    // SUPPRESSION DE const [isPlaying, setIsPlaying] = useState(false);
-    // SUPPRESSION DE const handlePlayClick = () => { ... }
-
     return (
         <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-all group">
             <button 
-                // Le bouton appelle juste l'action globale
                 onClick={onPlayClick}
                 className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${
                     isPlaying ? 'bg-brand-accent text-white scale-105' : 'bg-slate-100 text-brand-dark group-hover:bg-brand-primary group-hover:text-white'
@@ -31,7 +26,6 @@ const AudioPlayer: React.FC<AudioPlayerProps & { onPlayClick: () => void }> = ({
                     <span className="text-xs text-gray-500 font-mono bg-gray-100 px-2 py-0.5 rounded">{track.category}</span>
                 </div>
                 
-                {/* Fake Visualizer */}
                 <div className="h-8 flex items-center gap-0.5">
                     {Array.from({ length: 40 }).map((_, i) => {
                         const height = Math.max(20, Math.min(100, ((i * track.title.length * 7) % 80) + 20));
